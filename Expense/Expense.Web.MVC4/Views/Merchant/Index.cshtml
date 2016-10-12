@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Expense.Web.MVC4.ViewModel.MerchantViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Merchants</h2>
+<table class="table-bordered">
+    <thead>
+        <tr>
+            <th>Merchant Name</th>
+            <th>Alias</th>
+            <th>Notes</th>
+            <th>Status</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+            <tr>
+                <td>@m.Name</td>
+                <td>@m.Alias</td>
+                <td>@m.Notes</td>
+                <td>@m.Status</td>
+                <td>@Html.ActionLink("View", "Details", "Merchant", new { alias = m.Alias }, null)</td>
+                <td>@Html.ActionLink("Edit", "Edit", "Merchant", new { alias = m.Alias }, null)</td>
+            </tr>
+        }
+    </tbody>
+</table>

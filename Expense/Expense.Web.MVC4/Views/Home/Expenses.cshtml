@@ -1,0 +1,32 @@
+﻿@model List<Expense.Web.MVC4.ViewModel.ExpenseJournalViewModel>
+@{
+    ViewBag.Title = "Expenses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Expenses</h2>
+
+<table>
+    <thead>
+        <tr>
+            <td>Amount</td>
+            <td>Category</td>
+            <td>Date</td>
+            <td>Merchant</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var e in Model)
+        {
+            <tr>
+                <td>@e.Amount</td>
+                <td>@e.Category</td>
+                <td>@e.ExpneseDate</td>
+                <td>@e.Merchant</td>
+            </tr>
+
+        }
+    </tbody>
+    <tfoot></tfoot>
+</table>
+
