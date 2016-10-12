@@ -34,7 +34,7 @@ namespace Expense.Web.MVC4Tests
         }
 
         [TestInitialize]
-        private void SetUpExpenseController()
+        public void SetUpExpenseController()
         {
             _repo = new Mock<IExpenseRepository>();
             _sut = new HomeController.ExpenseController(_repo.Object);
