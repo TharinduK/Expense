@@ -2,10 +2,10 @@ using System.Linq;
 using System.Web.Mvc;
 using Microsoft.Practices.Unity.Mvc;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Expense.Web.MVC4.App_Start.UnityWebActivator), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(Expense.Web.MVC4.App_Start.UnityWebActivator), "Shutdown")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Expense.Web.MVC4.UnityWebActivator), "Start")]
+[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(Expense.Web.MVC4.UnityWebActivator), "Shutdown")]
 
-namespace Expense.Web.MVC4.App_Start
+namespace Expense.Web.MVC4
 {
     /// <summary>Provides the bootstrapping for integrating Unity with ASP.NET MVC.</summary>
     public static class UnityWebActivator

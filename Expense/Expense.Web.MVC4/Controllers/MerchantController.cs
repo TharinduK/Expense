@@ -14,14 +14,10 @@ namespace Expense.Web.MVC4.Controllers
         private readonly IExpenseRepository _repo;
         private IApplicationLogger _log;
 
-        public MerchantController(): this(null, null)
+        public MerchantController(IExpenseRepository repo, IApplicationLogger log)
         {
-
-        }
-        public MerchantController(IExpenseRepository repo = null, IApplicationLogger log = null)
-        {
-            _repo = repo ?? new ExpenseRepository();
-            _log = log ?? new Expense.CoreTests.Unit.FakeApplicationLogger();
+            _repo = repo;
+            _log = log;
         }
         // GET: Merchant
         public ActionResult Index()

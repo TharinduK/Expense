@@ -1,8 +1,10 @@
 using System;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
+using Expense.Core;
+using Expense.DALInMemory;
 
-namespace Expense.Web.MVC4.App_Start
+namespace Expense.Web.MVC4
 {
     /// <summary>
     /// Specifies the Unity configuration for the main container.
@@ -36,7 +38,8 @@ namespace Expense.Web.MVC4.App_Start
             // container.LoadConfiguration();
 
             // TODO: Register your types here
-            // container.RegisterType<IProductRepository, ProductRepository>();
+            container.RegisterInstance<IExpenseRepository>(new ExpenseRepository());
+            container.RegisterType<IApplicationLogger, Expense.CoreTests.Unit.FakeApplicationLogger>();
         }
     }
 }
