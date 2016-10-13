@@ -154,6 +154,7 @@
     <Compile Include="Controllers\ExpenseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MerchantController.cs" />
+    <Compile Include="ViewModel\Converter\MerchantViewModelConverter.cs" />
     <Compile Include="ViewModel\ExpenseJournalMapper.cs" />
     <Compile Include="ViewModel\ExpenseViewModel.cs" />
     <Compile Include="Global.asax.cs">

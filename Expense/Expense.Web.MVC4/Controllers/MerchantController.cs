@@ -24,16 +24,12 @@ namespace Expense.Web.MVC4.Controllers
         {
             var tran = new GetAllMerchantsTransaction(_repo, _log);
             tran.Execute();
-            var merchants = GetMerchantsViewModel(tran.Results);
+            var merchants = MerchantViewModelConverter.ToMerchantViewModelCollection(tran.Results);
             if (tran.WasExecutionSucessfull) return View(merchants);
             else return View(); //TODO: redirect to error page
         }
 
-        private IEnumerable<MerchantViewModel> GetMerchantsViewModel(IEnumerable<Merchant> results)
-        {
-            foreach (var m in results)
-                yield return ConvertMerchant(m);
-        }
+
 
         // GET: Merchant/Details/5
         public ActionResult Details(string alias)
@@ -48,26 +44,11 @@ namespace Expense.Web.MVC4.Controllers
 
             merchantTransaction.Execute();
             var merchant = merchantTransaction.Result;
-            var vmMerchant = ConvertMerchant(merchant);
+            var vmMerchant = MerchantViewModelConverter.ToMerchantViewModel(merchant);
             return vmMerchant;
         }
 
-        private MerchantViewModel ConvertMerchant(Merchant merchant)
-        {
-            return new MerchantViewModel
-            {
-                Alias = merchant.MerchantAlias,
-                Name = merchant.MerchantName,
-                Notes = merchant.Notes,
-                Status = merchant.IsActive ? "Active" : "Inactive"
-            };
-        }
 
-        private Merchant ConvertMerchant(MerchantViewModel merchant)
-        {
-            return new Merchant(merchant.Name, merchant.Alias, merchant.Notes, merchant.Status == "Active" ? true : false);
-            
-        }
 
         // GET: Merchant/Create
         public ActionResult Create()
@@ -101,14 +82,14 @@ namespace Expense.Web.MVC4.Controllers
 
         // POST: Merchant/Edit/5
         [HttpPost]
-        public ActionResult Edit(MerchantViewModel merchant)
+        public ActionResult Edit(MerchantViewModel merchantVM)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
                     //TODO: figure out how to move instanciation to a different file
-                    var tran = new UpdateMerchantTransaction(_repo, _log, ConvertMerchant(merchant));
+                    var tran = new UpdateMerchantTransaction(_repo, _log, MerchantViewModelConverter.ToMerchant(merchantVM));
                     tran.Execute();
                     if (tran.WasExecutionSucessfull) ModelState.Clear();  //clear to add new expense 
                     else ModelState.AddModelError("", "Error adding expense ");

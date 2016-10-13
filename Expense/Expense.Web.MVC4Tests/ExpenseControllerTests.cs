@@ -12,6 +12,13 @@ namespace Expense.Web.MVC4Tests
         private Mock<IExpenseRepository> _repo;
         private HomeController.ExpenseController _sut;
 
+        [TestInitialize]
+        public void SetUpExpenseController()
+        {
+            _repo = new Mock<IExpenseRepository>();
+            _sut = new HomeController.ExpenseController(_repo.Object);
+        }
+
         [TestMethod]
         public void AddExpenseAllInfoCollected_WhenMissingRequiredInfo_ShouldFail()
         {
@@ -33,12 +40,7 @@ namespace Expense.Web.MVC4Tests
             Assert.AreEqual(false, _sut.AllRequiredInformationCollected(model));
         }
 
-        [TestInitialize]
-        public void SetUpExpenseController()
-        {
-            _repo = new Mock<IExpenseRepository>();
-            _sut = new HomeController.ExpenseController(_repo.Object);
-        }
+
 
         [TestMethod]
         public void AddExpenseAllInfoCollected_WhenCompleteRequiredInfo_ShouldPass()

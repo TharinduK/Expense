@@ -9,7 +9,7 @@ namespace Expense.Web.MVC4.ViewModel
     {
         public string Alias { get; set; }
         public string Name { get; set; }
-        public string Notes { get; internal set; }
-        public string Status { get; internal set; }
+        public string Notes { get; set; }
+        public string Status { get; set; }
     }
 }
